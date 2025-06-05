@@ -1,0 +1,54 @@
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# NOTES:
+
+# (i): If this update of co-ordinates is kept within "if my_fingers[1] and not my_fingers[2]:", then drawing will start from the last point where the painting was stopped. 
+
+    # Reason: The condition implies "only index finger is up", so keeping this line within this condition means to update the drawing co-ordinate 
+    only when index finger is up. This draws an unnecessary straight line connecting points between (a) and (b) :-
+    
+    # (a) where your index finger was up for the last time (before switing off from painting mode)
+    # (b) where your index finger currently is (while swithing on paint mode)
+
+    which looks like a glitch (try it out!)
+
+
+# (ii): Thresholding step ensures that pixels with intensity <= 50 are turned white, and those > 50 are turned black (inversion).
+
+# (iii): Convert: just to make it 3d np array from 1d np array for compatibility while overlapping with 3d images (np arrays) ahead in steps where 
+    # bitwise operations are done between images (3d and 1d images aren't compatible for bitwise operations, images being compared and operated 
+    # on bit-by-bit must have same dimension for unambiguous execution)
+
+# (iv) logics used: (refer README for detail)
+
+    # (a): 1 AND X == X, as per this Boolean rule, white_bg_of_bin_inv_img AND the_frame_bg will gives the frame_bg because white is equivalent to 1
+
+    # (b): 0 AND X == 0, as per this Boolean rule, black_lines_on_bin_inv_img AND colored_lines_on_frame gives the black lines on frame because black is equivalent to 0
+
+    # (c): 1 OR X == 1, as per this Boolean rule, colorful_lines_on_image_canvas OR black_lines_on_frame2 gives colorful lines on frame2 because colorful is non-zero i.e. non-false i.e. TRUE, black is FALSE and TRUE OR FALSE gives TRUE
+
+    # (d): 0 OR X == X, as per this Boolean rule, black_bg_of_img_canvas OR non_black_bg_of_frame2 gives the latter one because of similar comparisons of colors with TRUE and FALSE values as done above.
+
+
+# (v) Why? 
+
+   # Answer: because waitkey not only checks for key-presses but also any kind of "window events" (which includes window close events)
+   # so when you close window by clicking  the 'X' button, the function-call: cv2.waitkey() registers it as an "event"
+   # now you can check for "cv2.getWindowProperty" and it will give you a value < 1 i.e. window is NOT open. And so you break out of the loop. As simple as that.
+
+   # Why cv2.waitkey() is not enough to break out of the loop?
+
+   # Answer: you closed the window using a mouse-event which is not a key-press hence the above if condition will not be true and you will NOT be able to break out 
+   # of the loop. So we need the below function-call to verify the window visible state (visible if open i.e. value == 1, else closed) is not open i.e. < 
+   # 1 and thus break out from the while loop. This function doesn't rely on key-press, rather directly checks the window's open/close status.
+
+   # What if I use cv2.getWindowProperty() before cv2.waitKey() ?
+
+   # Answer: You will see another window opening everytime you attempt to close the current window i.e. you won't break out of the while loop ever
+   # Reason: python interpreter follows top-down scanning of code. When you click the close button, the window actually closes. Its true. 
+   # BUT -> cv2 doesn't know it has closed because to register such event in the event loop of opencv, you need to call the cv2.waitkey() function 
+   # so at the present moment, cv2 thinks the window is STILL OPEN! and so  cv2.getWindowProperty(...) will return 1 (i.e. OPEN) and again, 
+   # you can't break out of the while loop.
+   
+   
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
