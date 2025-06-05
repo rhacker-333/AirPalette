@@ -1,4 +1,4 @@
-![Alt text](logo.jpg)
+![Alt text](resources/logo.jpg)
 
 # TouchPro
 
