@@ -22,7 +22,7 @@ currentT = 0
 previousT = 0
 
 # Path to the directory containing overlay/header images
-header_img = "header_images"
+header_img = header_img = os.path.join(os.path.dirname(__file__), "header_images") 
 header_img_list = os.listdir(header_img)  # Get the list of images in the header folder
 overlay_image = []  # List to store loaded overlay images
 
