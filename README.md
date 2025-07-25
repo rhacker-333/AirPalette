@@ -83,7 +83,7 @@ Main dependencies:
 - [OpenCV](https://opencv.org/)
 - [NumPy](https://numpy.org/)
 - [pyautogui](https://pyautogui.readthedocs.io/)
-- [MediaPipe](https://google.github.io/mediapipe/) (if used)
+- [MediaPipe](https://google.github.io/mediapipe/)
 - The open source community!
 
 **Happy painting!** ✋🎨  
