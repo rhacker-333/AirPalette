@@ -77,9 +77,6 @@ Main dependencies:
 - Update toolbar icons by replacing images in `header_images/`.
 - Tweak hand gesture logic in `helpers/track_hands.py`.
 
-## License
-
-MIT License *(replace or adapt as needed).*
 
 ## Acknowledgments
 
