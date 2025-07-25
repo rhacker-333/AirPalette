@@ -1,6 +1,4 @@
-#
-# LIP == Local Independent Painter
-#
+
 import os  # Used for handling file operations
 import time  # Time module to calculate FPS (Frames Per Second)
 
